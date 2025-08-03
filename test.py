@@ -124,6 +124,17 @@ class TodoApp:
             # 完了したタスクは色を変更
             if todo["completed"]:
                 self.listbox.itemconfig(tk.END, {'fg': 'gray'})
+    
+    #タスクに優先度を追加する機能を実装する場合は、以下のように変更できます。
+    def add_priority(self):
+        """タスクに優先度を追加する機能"""
+        priority = self.priority_entry.get().strip()
+        if priority:
+            self.todos[-1]["priority"] = priority
+            self.save_todos()
+            self.refresh_list()
+        else:
+            messagebox.showwarning("警告", "優先度を入力してください")
 
 def main():
     root = tk.Tk()
