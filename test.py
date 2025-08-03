@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import messagebox
+from tkinter import messagebox, simpledialog
 import json
 import os
 
@@ -77,9 +77,9 @@ class TodoApp:
         """新しいタスクを追加（タスク名と日付）"""
         """新しいタスクを追加（コメントも記入可能）"""
         task = self.entry.get().strip()
-        date = tk.simpledialog.askstring("日付入力", "タスクの日付を入力してください（例: 2024-06-01）")
-        comment = tk.simpledialog.askstring("コメント", "タスクにコメントを追加しますか？（省略可）")
         if task:
+            date = simpledialog.askstring("日付入力", "タスクの日付を入力してください（例: 2024-06-01）")
+            comment = simpledialog.askstring("コメント", "タスクにコメントを追加しますか？（省略可）")
             todo_item = {
                 "task": task,
                 "completed": False,
@@ -128,17 +128,6 @@ class TodoApp:
             # 完了したタスクは色を変更
             if todo["completed"]:
                 self.listbox.itemconfig(tk.END, {'fg': 'gray'})
-    
-    #タスクに優先度を追加する機能を実装する場合は、以下のように変更できます。
-    def add_priority(self):
-        """タスクに優先度を追加する機能"""
-        priority = self.priority_entry.get().strip()
-        if priority:
-            self.todos[-1]["priority"] = priority
-            self.save_todos()
-            self.refresh_list()
-        else:
-            messagebox.showwarning("警告", "優先度を入力してください")
 
 def main():
     root = tk.Tk()
