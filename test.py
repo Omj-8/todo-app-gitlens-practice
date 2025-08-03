@@ -74,13 +74,15 @@ class TodoApp:
             messagebox.showerror("エラー", f"保存に失敗しました: {e}")
     
     def add_todo(self):
-        """新しいタスクを追加"""
+        """新しいタスクを追加（コメントも記入可能）"""
         task = self.entry.get().strip()
+        comment = tk.simpledialog.askstring("コメント", "タスクにコメントを追加しますか？（省略可）")
         if task:
             todo_item = {
                 "task": task,
                 "completed": False,
-                "id": len(self.todos) + 1
+                "id": len(self.todos) + 1,
+                "comment": comment if comment else ""
             }
             self.todos.append(todo_item)
             self.save_todos()
