@@ -74,13 +74,15 @@ class TodoApp:
             messagebox.showerror("エラー", f"保存に失敗しました: {e}")
     
     def add_todo(self):
-        """新しいタスクを追加"""
+        """新しいタスクを追加（タスク名と日付）"""
         task = self.entry.get().strip()
+        date = tk.simpledialog.askstring("日付入力", "タスクの日付を入力してください（例: 2024-06-01）")
         if task:
             todo_item = {
                 "task": task,
                 "completed": False,
-                "id": len(self.todos) + 1
+                "id": len(self.todos) + 1,
+                "date": date if date else ""
             }
             self.todos.append(todo_item)
             self.save_todos()
